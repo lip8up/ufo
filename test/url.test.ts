@@ -29,6 +29,14 @@ describe('parseURL', () => {
         search: '',
         hash: '#owo'
       }
+    },
+    {
+      input: 'd:/some/path',
+      out: { pathname: 'd:/some/path', search: '', hash: '' }
+    },
+    {
+      input: 'd:/some/path.vue?macro=true&lang=tsx',
+      out: { pathname: 'd:/some/path.vue', search: '?macro=true&lang=tsx', hash: '' }
     }
   ]
 

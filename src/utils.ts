@@ -7,11 +7,12 @@ export function isRelative (inputStr: string) {
   return ['./', '../'].some(str => inputStr.startsWith(str))
 }
 
+const WINDOWS_PATH = /^[a-z]:\/[^/]/i
 const PROTOCOL_REGEX = /^\w+:(\/\/)?/
 const PROTOCOL_RELATIVE_REGEX = /^\/\/[^/]+/
 
 export function hasProtocol (inputStr: string, acceptProtocolRelative = false): boolean {
-  return PROTOCOL_REGEX.test(inputStr) || (acceptProtocolRelative && PROTOCOL_RELATIVE_REGEX.test(inputStr))
+  return !WINDOWS_PATH.test(inputStr) && (PROTOCOL_REGEX.test(inputStr) || (acceptProtocolRelative && PROTOCOL_RELATIVE_REGEX.test(inputStr)))
 }
 
 const TRAILING_SLASH_RE = /\/$|\/\?/
